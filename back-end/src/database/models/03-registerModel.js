@@ -31,7 +31,7 @@ const RegisterSchema = (sequelize, DataTypes) => {
         }
       },
       {
-        tableName: "registers",
+        tableName: "register",
         underscored: true,
         timestamps: false,
       }

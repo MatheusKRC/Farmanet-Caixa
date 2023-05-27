@@ -1,5 +1,5 @@
 const md5 = require('md5');
-const { User } = require('../../database/models');
+const { User, Role, Local } = require('../../database/models');
 const { getLocal } = require('../Utils/GetLocal');
 const { getRole } = require('../Utils/GetRole');
 
@@ -34,9 +34,39 @@ const registerUser = async ({ name, email, password, role, local, icon }) => {
     return { status: null, message: createUser };
 };
 
+const getCashier = async () => {
+    const findRole = await getRole('Caixa');
+    const getCashiers = await User.findAll({ 
+        where: { roleId: findRole.id },
+        include: [
+            {
+                model: Role,
+                as: 'roles',
+            },
+            {
+                model: Local,
+                as: 'locals',
+            },
+        ],
+        attributes: { exclude: ['password'] },
+    });
+    return { status: null, message: getCashiers };
+};
+
 const getUsers = async () => {
-    const getAllUsers = await User.findAll();
-    console.log(md5('abd030389'));
+    const getAllUsers = await User.findAll({
+        include: [
+            {
+                model: Role,
+                as: 'roles',
+            },
+            {
+                model: Local,
+                as: 'locals',
+            },
+        ],
+        attributes: { exclude: ['password'] },
+    });
     if (!getAllUsers) {
         return { status: 404, message: 'Users Not Found' };
     }
@@ -53,6 +83,7 @@ const deleteUser = async (name) => {
 
 module.exports = {
     getUsers,
+    getCashier,
     loginUser,
     registerUser,
     deleteUser,

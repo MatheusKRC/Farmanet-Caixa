@@ -21,7 +21,7 @@ const RoleSchema = (sequelize, DataTypes) => {
     );
     RoleTable.associate = (models) => {
         RoleTable.hasMany(models.User, {
-            as: 'role',
+            as: 'roles',
             foreignKey: 'roleId'
         })
     };
