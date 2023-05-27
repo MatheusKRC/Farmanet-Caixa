@@ -26,6 +26,14 @@ const getUsers = async (_req, res) => {
     return res.status(200).json(message);
   };
 
+const getCashier = async (_req, res) => {
+    const { status, message } = await userServices.getCashier();
+    if (status) {
+      return res.status(status).json(message);
+    }
+    return res.status(200).json(message);
+  }; 
+
 const deleteUser = async (req, res) => {
   const { name } = req.body;
   const { status, message } = await userServices.deleteUser(name);
@@ -37,6 +45,7 @@ const deleteUser = async (req, res) => {
 
   module.exports = {
     getUsers,
+    getCashier,
     loginUser,
     registerUser,
     deleteUser,

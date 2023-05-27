@@ -176,6 +176,118 @@ module.exports = {
             value: 'R$ 7685,89',
             hour: '12:00'
         },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Pedro Henrique)',
+            value: 'R$ 50,00',
+            hour: '07:30'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Epitacio)',
+            value: 'R$ 100,00',
+            hour: '07:50'
+        },
+        {
+            register_id: '2',
+            category_id: '2',
+            description: 'Devolução',
+            value: 'R$13,00',
+            hour: '08:38'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Vitoria)',
+            value: 'R$ 18,70',
+            hour: '08:50'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Marinalva da Silva)',
+            value: 'R$ 171,99',
+            hour: '09:10'
+        },
+        {
+            register_id: '2',
+            category_id: '2',
+            description: 'Banco',
+            value: 'R$ 700,00',
+            hour: '09:30'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Lucilandia Francisca)',
+            value: 'R$ 17,00',
+            hour: '09:50'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Maria Maura)',
+            value: 'R$ 78,00',
+            hour: '10:20'
+        },
+        {
+            register_id: '2',
+            category_id: '2',
+            description: 'Moedas',
+            value: 'R$ 232,00',
+            hour: '10:50'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pix (Valdivania)',
+            value: 'R$ 37,00',
+            hour: '11:30'
+        },
+        {
+            register_id: '2',
+            category_id: '2',
+            description: 'Desconto',
+            value: 'R$ 17,00',
+            hour: '11:45'
+        },
+        {
+            register_id: '2',
+            category_id: '3',
+            description: 'Cartão',
+            value: 'R$ 194,77',
+            hour: '12:00'
+        },
+        {
+            register_id: '2',
+            category_id: '1',
+            description: 'Caixa(01)',
+            value: 'R$ 2.887,00',
+            hour: '12:00'
+        },
+        {
+            register_id: '2',
+            category_id: '4',
+            description: 'Pixs',
+            value: 'R$ 472,69',
+            hour: '12:00'
+        },
+        {
+            register_id: '2',
+            category_id: '2',
+            description: 'Saídas',
+            value: 'R$ 962,00',
+            hour: '12:00'
+        },
+        {
+            register_id: '2',
+            category_id: '5',
+            description: 'Total Do Caixa',
+            value: 'R$ 4.516,48',
+            hour: '12:00'
+        },
       ],
       {}
     );

@@ -53,7 +53,7 @@ const UserSchema = (sequelize, DataTypes) => {
       });
 
       UserTable.belongsTo(models.Role, {
-        as: 'role',
+        as: 'roles',
         foreignKey: 'roleId',
       });
     };
