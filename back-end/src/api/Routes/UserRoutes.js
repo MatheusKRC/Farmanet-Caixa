@@ -17,6 +17,6 @@ userRoutes.delete('/users/admin', userControllers.deleteUser);
 
 userRoutes.get('/users/admin', userControllers.getUsers);
 
-userRoutes.get('/admin', userControllers.getCashier);
+userRoutes.get('/admin', userControllers.getEmployee);
 
 module.exports = userRoutes;
