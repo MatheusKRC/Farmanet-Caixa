@@ -1,6 +1,8 @@
 const { Register, Category } = require('../../database/models');
 const { getCategory } = require('../Utils/GetCategory');
 
+const register404 = 'Register Not Found';
+
 const getRegisters = async () => {
     const allRegisters = await Register.findAll({
         include: [
@@ -27,7 +29,7 @@ const getRegisterById = async (id) => {
         ],
     });
     if (!register) {
-        return { status: 404, message: 'Register Not Found' };
+        return { status: 404, message: register404 };
     }
     return { status: null, message: register };
 };
@@ -43,8 +45,40 @@ const postRegister = async ({ registerId, category, description, value }) => {
     return { status: null, message: createRegister };
 };
 
+const deleteRegister = async (id) => {
+    const deletedRegister = await Register.destroy({ where: { id } });
+    if (!deletedRegister) {
+        return { status: 404, message: register404 };
+    }
+    return { status: null, message: 'Register Deleted' };
+};
+
+const updateRegister = async ({ id, category, description, value }) => {
+    const findCategory = await getCategory(category);
+    const updatedRegister = await Register.update({ 
+        categoryId: findCategory.id, description, value }, { where: { id } });
+    if (!updatedRegister) {
+        return { status: 404, message: register404 };
+    }
+    return { status: null, message: 'Register Updated' };
+};
+
+const getValues = async (registerId) => {
+    const allValues = await Register.findAll({
+        where: { registerId },
+        attributes: ['value'],
+    });
+    if (!allValues) {
+        return { status: 404, message: 'Values Not Found' };
+    }
+    return { status: null, message: allValues };
+};
+
 module.exports = {
     getRegisters,
     getRegisterById,
     postRegister,
+    deleteRegister,
+    updateRegister,
+    getValues,
 };

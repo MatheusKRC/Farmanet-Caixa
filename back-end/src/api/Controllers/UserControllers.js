@@ -26,8 +26,9 @@ const getUsers = async (_req, res) => {
     return res.status(200).json(message);
   };
 
-const getCashier = async (_req, res) => {
-    const { status, message } = await userServices.getCashier();
+const getEmployee = async (req, res) => {
+    const { role } = req.body;
+    const { status, message } = await userServices.getEmployee(role);
     if (status) {
       return res.status(status).json(message);
     }
@@ -45,7 +46,7 @@ const deleteUser = async (req, res) => {
 
   module.exports = {
     getUsers,
-    getCashier,
+    getEmployee,
     loginUser,
     registerUser,
     deleteUser,
