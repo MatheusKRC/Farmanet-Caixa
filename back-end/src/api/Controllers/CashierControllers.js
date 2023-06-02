@@ -35,9 +35,19 @@ const patchStatus = async (req, res) => {
     return res.status(200).json(message);
 };
 
+const deleteCashier = async (req, res) => {
+    const { id } = req.body;
+    const { status, message } = await cashierServices.deleteCashier(id);
+    if (status) {
+        return res.status(status).json(message);
+    }
+    return res.status(200).json(message);
+};
+
 module.exports = {
     postCashier,
     getCashiers,
     getCashierById,
     patchStatus,
+    deleteCashier,
 };

@@ -62,9 +62,18 @@ const patchStatus = async ({ status, id }) => {
     return { status: null, message: 'Status Updated' };
 };
 
+const deleteCashier = async (id) => {
+    const deletedCashier = await Cashier.destroy({ where: { id } });
+    if (!deletedCashier) {
+        return { status: 400, message: 'Cashier Not Found' };
+    }
+    return { status: null, message: 'Cashier Deleted' };
+};
+
 module.exports = {
     postCashier,
     getCashiers,
     patchStatus,
     getCashierById,
+    deleteCashier,
 };
