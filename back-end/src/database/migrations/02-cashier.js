@@ -1,7 +1,7 @@
 module.exports = {
     up: async (queryInterface, Sequelize) => {
       await queryInterface.createTable('cashier', {
-      register_id: {
+      id: {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
