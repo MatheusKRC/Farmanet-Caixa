@@ -10,7 +10,8 @@ const RegisterSchema = (sequelize, DataTypes) => {
         },
         registerId: {
             allowNull:false,
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            foreignKey: true,
         },
         categoryId: {
             allowNull: false,
@@ -42,7 +43,7 @@ const RegisterSchema = (sequelize, DataTypes) => {
             foreignKey: 'categoryId'
         })
 
-        RegisterTable.hasMany(models.Cashier, {
+        RegisterTable.belongsTo(models.Cashier, {
             as: 'registers',
             foreignKey: 'registerId'
         })

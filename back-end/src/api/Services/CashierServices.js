@@ -1,4 +1,5 @@
-const { Cashier, User, Local, Status } = require('../../database/models');
+const { Cashier, User, Local, Status, Register } = require('../../database/models');
+const { getStatus } = require('../Utils/GetStatus');
 
 const postCashier = async ({ userId, officeHour, localId }) => {
     const today = new Date();
@@ -11,8 +12,7 @@ const postCashier = async ({ userId, officeHour, localId }) => {
 };
 
 const getCashiers = async () => {
-    const findCashiers = await Cashier.findAll({ include: [
-        {
+    const findCashiers = await Cashier.findAll({ include: [{
             model: User,
             as: 'users',
         },
@@ -24,14 +24,47 @@ const getCashiers = async () => {
             model: Status,
             as: 'status',
         },
+        {
+            model: Register,
+            as: 'registers',
+        },
     ] });
-    if (!findCashiers) {
- return { status: 404, message: 'Cashiers Not Found' };
-    }
     return { status: null, message: findCashiers };
+};
+
+const getCashierById = async (id) => {
+    const findCashiers = await Cashier.findAll({ where: { id },
+include: [{
+            model: User,
+            as: 'users' },
+        {
+            model: Local,
+            as: 'locals',
+        },
+        {
+            model: Status,
+            as: 'status',
+        },
+        {
+            model: Register,
+            as: 'registers',
+        },
+    ] });
+    return { status: null, message: findCashiers };
+};
+
+const patchStatus = async ({ status, id }) => {
+    const findStatus = await getStatus(status);
+    const updateStatus = await Cashier.update({ statusId: findStatus }, { where: { id } }); 
+    if (!updateStatus) {
+        return { status: 400, message: 'Cashier Not Found' };
+    }
+    return { status: null, message: 'Status Updated' };
 };
 
 module.exports = {
     postCashier,
     getCashiers,
+    patchStatus,
+    getCashierById,
 };
