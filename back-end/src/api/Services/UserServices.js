@@ -34,9 +34,9 @@ const registerUser = async ({ name, email, password, role, local, icon }) => {
     return { status: null, message: createUser };
 };
 
-const getCashier = async () => {
-    const findRole = await getRole('Caixa');
-    const getCashiers = await User.findAll({ 
+const getEmployee = async (role) => {
+    const findRole = await getRole(role);
+    const getEmployees = await User.findAll({ 
         where: { roleId: findRole.id },
         include: [
             {
@@ -50,7 +50,7 @@ const getCashier = async () => {
         ],
         attributes: { exclude: ['password'] },
     });
-    return { status: null, message: getCashiers };
+    return { status: null, message: getEmployees };
 };
 
 const getUsers = async () => {
@@ -81,10 +81,30 @@ const deleteUser = async (name) => {
     return { status: null, message: delUser };
 };
 
+const patchUser = async ({ id, name, email, password, role, local, icon }) => {
+    const md5Password = md5(password);
+    const findRole = await getRole(role);
+    const findLocal = await getLocal(local);
+
+    if (!findLocal || !findRole) {
+        return { status: 404, message: 'Role or Local Invalid' };
+    }
+
+    const createUser = await User.update({ 
+        name, email, password: md5Password, roleId: findRole.id, localId: findLocal.id, icon }, 
+        { where: { id } });
+    
+    if (!createUser) {
+        return { status: 404, message: 'User Not Found' };
+    }
+    return { status: null, message: 'User Updated' };
+};
+
 module.exports = {
     getUsers,
-    getCashier,
+    getEmployee,
     loginUser,
     registerUser,
     deleteUser,
+    patchUser,
 };

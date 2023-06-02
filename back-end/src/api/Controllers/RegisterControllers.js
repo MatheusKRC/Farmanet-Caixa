@@ -26,8 +26,38 @@ const postRegister = async (req, res) => {
     return res.status(200).json(message);
 };
 
+const deleteRegister = async (req, res) => {
+    const { id } = req.body;
+    const { status, message } = await registerServices.deleteRegister(id);
+    if (status) {
+        return res.status(status).json(message);
+    }
+    return res.status(200).json(message);
+};
+
+const updateRegister = async (req, res) => {
+    const { body } = req.params;
+    const { status, message } = await registerServices.updateRegister(body);
+    if (status) {
+       return res.status(status).json(message);
+    }
+    return res.status(200).json(message);
+};
+
+const getValues = async (req, res) => {
+    const { id } = req.params;
+    const { status, message } = await registerServices.getValues(id);
+    if (status) {
+        return res.status(status).json(message);
+    }
+    return res.status(200).json(message);
+};
+
 module.exports = {
     getRegisters,
     getRegisterById,
     postRegister,
+    deleteRegister,
+    updateRegister,
+    getValues,
 };

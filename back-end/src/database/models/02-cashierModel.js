@@ -2,9 +2,8 @@ const CashierSchema = (sequelize, DataTypes) => {
     const CashierTable = sequelize.define(
       "Cashier",
       {
-        registerId: {
+        id: {
           allowNull: false,
-          foreignKey: true,
           primaryKey: true,
           autoIncrement: true,
           type: DataTypes.INTEGER
@@ -40,9 +39,9 @@ const CashierSchema = (sequelize, DataTypes) => {
       }
     );
     CashierTable.associate = (models) => {
-      CashierTable.belongsTo(models.Register, {
+      CashierTable.hasMany(models.Register, {
         as: 'registers',
-        foreignKey: 'RegisterId'
+        foreignKey: 'registerId'
       })
 
       CashierTable.belongsTo(models.User, {
