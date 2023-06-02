@@ -19,4 +19,6 @@ userRoutes.get('/users/admin', userControllers.getUsers);
 
 userRoutes.get('/admin', userControllers.getCashier);
 
+userRoutes.patch('/admin', userControllers.patchUser);
+
 module.exports = userRoutes;

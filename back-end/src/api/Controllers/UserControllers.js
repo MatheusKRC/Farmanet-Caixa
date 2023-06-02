@@ -43,10 +43,20 @@ const deleteUser = async (req, res) => {
   return res.status(202).json(message);
 };
 
+const patchUser = async (req, res) => {
+  const { body } = req;
+  const { status, message } = await userServices.patchUser(body);
+  if (status) {
+    return res.status(status).json(message);
+  }
+  return res.status(200).json(message);
+};
+
   module.exports = {
     getUsers,
     getCashier,
     loginUser,
     registerUser,
     deleteUser,
+    patchUser,
   };
